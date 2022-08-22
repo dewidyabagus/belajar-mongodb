@@ -8,9 +8,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// TODO: Membuka koneksi database Mongodb dengan mengembalikan (return value)
+//       pointer database yang digunakan.
 func MongoConnect(ctx context.Context, config MongoConfig) (*mongo.Database, error) {
 	uri := fmt.Sprintf(
-		"mongodb://%s:%s@%s:%s/?maxPoolSize=%s",
+		"mongodb://%s:%s@%s:%d/?maxPoolSize=%d",
 		config.Username, config.Password, config.Host, config.Port, config.MaxPoolSize,
 	)
 
