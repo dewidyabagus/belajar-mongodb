@@ -9,6 +9,7 @@ import (
 
 type App struct {
 	Name        string
+	AppHost     string
 	ListenPort  int
 	MongoConfig MongoConfig
 }
@@ -22,6 +23,7 @@ type MongoConfig struct {
 	MaxPoolSize int
 }
 
+// Loading konfigurasi services
 func LoadConfig() *App {
 	if err := godotenv.Load(); err != nil {
 		fmt.Println("Error load env:", err.Error())
@@ -29,6 +31,7 @@ func LoadConfig() *App {
 
 	return &App{
 		Name:       envar.GetEnv("APP_NAME", "default-app-name"),
+		AppHost:    envar.GetEnv("APP_HOST", "localhost"),
 		ListenPort: envar.GetEnv("APP_PORT", 5000),
 		MongoConfig: MongoConfig{
 			Host:        envar.GetEnv("MONGO_HOST", "localhost"),
